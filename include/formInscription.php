@@ -16,8 +16,8 @@
         </div>
         <br>
         <div>
-             <label for="password">Password :</label>
-             <input type="text" name="password" id="password" placeholder="Tapez votre Mot de passe">
+             <label for="mdp">Password :</label>
+             <input type="text" name="mdp" id="mdp" placeholder="Tapez votre Mot de passe">
         </div>
         <br>
         <div>
