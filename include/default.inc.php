@@ -1,1 +1,1 @@
-<h1>Default - Va t-en de la </h1>
+<h1>default</h1>

@@ -1,2 +1,2 @@
 # NFactoryBlog
-Exercice Blog
+Exercice blog

@@ -1,4 +1,4 @@
-<form action='' method="POST">
+<form action='#' method="POST">
         <br>
         <div>
              <label for="nom">Nom :</label>
@@ -16,8 +16,8 @@
         </div>
         <br>
         <div>
-             <label for="mdp">Password :</label>
-             <input type="text" name="mdp" id="mdp" placeholder="Tapez votre Mot de passe">
+             <label for="password">Mot de passe :</label>
+             <input type="text" name="password" id="password" placeholder="Tapez votre Mot de passe">
         </div>
         <br>
         <div>

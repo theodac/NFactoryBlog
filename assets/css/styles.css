@@ -1,0 +1,46 @@
+body {
+    background-color: whitesmoke;
+}
+
+header {
+
+}
+
+header ul {
+    list-style: none;
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+header ul li {
+    display: inline-block;
+    width: 10%;
+    
+}
+
+header ul li a {
+    
+}
+
+h1 {
+    text-align: center;
+}
+
+p {
+    text-align: center;
+}
+
+form {
+    text-align: center;
+}
+
+div {
+    margin: 0 auto;
+}
+footer {
+    text-align: center;
+}
+
+hr {
+    width: 50%;
+}

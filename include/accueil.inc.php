@@ -1,5 +1,2 @@
-<section>
-<?php 
-echo("Je suis un contenu");
-?>
-</section>
+<?php
+echo("<h1>Accueil</h1>");

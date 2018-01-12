@@ -1,5 +1,4 @@
 <footer>
-<p>&copy, <?php 
-echo(date('Y'));
-?></p>
+    <hr>
+    <p>&copy; <?php echo(date('Y'));?> NFactory</p>
 </footer>

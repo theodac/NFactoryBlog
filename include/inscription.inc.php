@@ -5,14 +5,14 @@ if(isset($_POST["formulaire"])) {
     $nom = $_POST['nom'];
     $prenom = $_POST['prenom'];
     $mail = $_POST['mail'];
-    $mdp = $_POST['mdp'];
+    $mdp = $_POST['password'];
     if($_POST["nom"] == "")
         array_push($tabErreur, "Veuillez saisir votre nom");
     if($_POST["prenom"] == "")
         array_push($tabErreur, "Veuillez saisir votre prénom");
     if($_POST["mail"] == "")
         array_push($tabErreur, "Veuillez saisir votre e-mail");
-    if($_POST["mdp"] == "")
+    if($_POST["password"] == "")
         array_push($tabErreur, "Veuillez saisir un mot de passe");
     if(count($tabErreur) != 0) {
         $message = "<ul>";
@@ -29,15 +29,16 @@ if(isset($_POST["formulaire"])) {
             die("Erreur MySQL " . mysqli_connect_errno() . " : " . mysqli_connect_error());
         }
         else {
+            $mdp = sha1($_POST['password']);
             $requete = "INSERT INTO t_users (ID_USER, USERNAME, USERFNAME,
                         USERMAIL, USERPASSWORD, USERDATEINS, T_ROLES_ID_ROLE)
-                        VALUES (NULL, '$nom', '$prenom', '$mail', SHA1('$mdp'), NULL, 5);";
+                        VALUES (NULL, '$nom', '$prenom', '$mail', '$mdp', NULL, 5);";
             mysqli_query($connexion, $requete);
             mysqli_close($connexion);
         }
     }
 }
 else {
-    echo("Je viens d'ailleurs");
+    echo("<p>Je viens d'ailleurs</p>");
     include("./include/formInscription.php");
 }
