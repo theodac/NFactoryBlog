@@ -1,4 +1,5 @@
 <?php
+if($_SESSION['login'] == 1){
 if(isset($_POST["article"])) {
     $tabErreur = array();
     $titre = $_POST['titre'];
@@ -45,4 +46,7 @@ if(isset($_POST["article"])) {
 
 }else{
     include ("./include/FormArticle.php");
+}
+}else {
+    echo("Vous n'avez pas accès a cette page !");
 }

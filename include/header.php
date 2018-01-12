@@ -5,9 +5,10 @@
         <?php
         if(!isset($_SESSION['login']))
             echo("<li><a href=\"index.php?page=login\">Login</a></li>");
-        else
+        else{
             echo("<li><a href=\"index.php?page=logout\">Logout</a></li>");
             echo("<li><a href=\"index.php?page=article\">Article</a></li>");
+        }
         ?>
 
     </ul>
