@@ -1,5 +1,4 @@
-<script src="https://cloud.tinymce.com/stable/tinymce.min.js"></script>
-<script>tinymce.init({ selector:'textarea' });</script>
+
 <form method="post" action="#">
         <div>
         <label for="titre">Titre de votre article </label>
@@ -10,12 +9,19 @@
             <input type="text" placeholder="Votre Sous-Titre" name="chapo">
         </div>
         <div>
+        <SELECT name="categorie" size="1">
+            <OPTION>Actualités
+            <OPTION>Archivé
+            <OPTION>
+            <OPTION>jeudi
+            <OPTION>vendredi
+        </SELECT>
+         </div>
+        <div>
             <label for="message">Votre Message </label>
             <textarea name="message" cols="3" placeholder="Votre Message ..."></textarea>
         </div>
-        <div>
-            <label for="date">Date de publication </label>
-            <input type="date" placeholder="Inserez votre date au format JJ/MM/AA" name="date">
-        </div>
+
+
         <input type="submit" value="Envoyer !" name="article">
 </form>

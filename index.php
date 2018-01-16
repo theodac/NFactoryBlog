@@ -9,8 +9,16 @@ include_once ("./functions/callPage.php");
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="./assets/css/styles.css" type="text/css" rel="stylesheet" />
+
     <title>Blog</title>
+
     <script src="./assets/js/function.js"></script>
+    <script type="text/javascript" src="./assets/js/tinymce/tinymce.min.js"></script>
+    <script type="text/javascript">
+        tinymce.init({
+            selector: 'textarea'
+        });
+    </script>
 </head>
 <body>
 <div id="container">
