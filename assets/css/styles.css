@@ -1,7 +1,7 @@
 body {
-    background:#49529D;
-    background-size: contain;
-    filter: sepia(50%);
+    background:url("../img/bg.jpg");
+    background-size: cover;
+    color: white;
 }
 
 header {
@@ -24,10 +24,10 @@ header ul li {
 header ul li a {
     text-decoration: none;
     font-size: 25px;
-    color: darkslateblue;
+    color: white;
 }
 header ul li a:hover{
-    color: firebrick;
+
     font-size: 30px;
     transition-delay: 180ms;
 }
@@ -56,11 +56,23 @@ hr {
     width: 50%;
 }
 #container {
-    background: linear-gradient(#2782E1,#478AFF,#30ACFF,#2380D1,#1370DB);
+    background: linear-gradient(#C70039,#FF5733,#FFC300);
     width: 50%;
     margin: 0 auto;
     border-radius: 5px;
 }
 form > div {
     margin: 5px 0;
+}
+h2 {
+    text-align: center;
+    margin-bottom: 0;
+}
+h3{
+    text-align: center;
+    margin-bottom: 0;
+}
+main div div{
+    padding: 0 15px;
+    text-align: justify;
 }

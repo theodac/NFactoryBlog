@@ -32,7 +32,8 @@ if (isset($_POST['login'])) {
                     <a href=\"index.php?page=accueil\">Vous êtes authentifié, viendez à la page d'accueil</a>");
                 }
                 else
-                    $_SESSION['login'] = 0;
+                    //$_SESSION['login'] = 0;
+                echo ("Votre e-mail ou mot de passe est érronné");
             }
         }
         mysqli_close($connexion);
