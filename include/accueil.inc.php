@@ -1,6 +1,9 @@
 <?php
 $connexion = mysqli_connect("localhost", "root", "", "NFactoryBlog");
-$reponse = mysqli_query($connexion,"SELECT * FROM `t_articles` ORDER BY `ARTDATE` DESC LIMIT 5");
+$reponse = mysqli_query($connexion,"SELECT * FROM `t_articles` ORDER BY `ARTDATE` DESC LIMIT 0,5");
+$sql = "SELECT COUNT(ID_ARTICLE) AS nbArt FROM t_articles ";
+$donnees= mysqli_fetch_array($reponse);
+
 while ($donnees= mysqli_fetch_array($reponse)){
 
     echo (html_entity_decode( "<div>"."<br/>" . "<h2>".$donnees['ARTTITRE'] . "</h2>". "<br/>" . "<h3>".  $donnees['ARTCHAPO'] ."</h3>". "<br/>" . "<div>". $donnees['ARTCONTENU'] ."</div>" . "<br/>" . "</div>" .  "<hr/>"));

@@ -31,8 +31,8 @@ if(isset($_POST["article"])) {
         }
         else {
             $message = addslashes(htmlentities($message , ENT_HTML5 , 'UTF-8'));
-            $chapo=addslashes(utf8_decode($chapo));
-            $titre=addslashes(utf8_decode($titre));
+            $chapo=addslashes(htmlentities($chapo));
+            $titre=addslashes(htmlentities($titre));
             $requete = "INSERT INTO t_articles (ID_ARTICLE, ARTTITRE, ARTCHAPO,
                         ARTCONTENU, ARTDATE)
                         VALUES (NULL, '$titre', '$chapo', '$message', NOW());";
