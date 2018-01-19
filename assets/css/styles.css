@@ -56,7 +56,7 @@ hr {
     width: 50%;
 }
 #container {
-    background: linear-gradient(#C70039,#FF5733,#FFC300);
+    background: linear-gradient(#FFC300,#FF5733,#C70039);
     width: 50%;
     margin: 0 auto;
     border-radius: 5px;

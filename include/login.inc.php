@@ -4,7 +4,7 @@ if (isset($_POST['login'])) {
     $tabErreur = array();
     $mail = $_POST['mail'];
     $password = $_POST['password'];
-    if ($mail == "")
+    if ($mail == "" || !filter_var($mail , FILTER_VALIDATE_EMAIL))
         array_push($tabErreur, "Veuillez saisir une adresse");
     if ($password == "")
         array_push($tabErreur, "Veuillez saisir un mot de passe");
@@ -28,8 +28,16 @@ if (isset($_POST['login'])) {
             if($result = mysqli_query($connexion, $requete)) {
                 if (mysqli_num_rows($result) > 0) {
                     $_SESSION['login'] = 1;
-                    echo ("<script>redirection(\"index.php?page=accueil\");</script>
-                    <a href=\"index.php?page=accueil\">Vous êtes authentifié, viendez à la page d'accueil</a>");
+                    while ($donnees=mysqli_fetch_array($result)){
+                        if ($donnees['T_ROLES_ID_ROLE'] == 1 || $donnees['T_ROLES_ID_ROLE'] == 2){
+                            echo ("<script>redirection(\"index.php?page=admin\")</script>");
+                            $_SESSION['admin'] = 1;
+                        }else{
+                            echo ("<script>redirection(\"index.php?page=accueil\")</script>");
+                        }
+                    }
+
+                    echo ("<a href=\"index.php?page=accueil\">Vous êtes authentifié, viendez à la page d'accueil</a>");
                 }
                 else
                     //$_SESSION['login'] = 0;

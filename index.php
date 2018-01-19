@@ -2,6 +2,20 @@
 session_start();
 include_once ("./functions/callPage.php");
 ?>
+<?php
+if (isset($_COOKIE['visite'])) {
+    setCookie('visite', $_COOKIE['visite'] + 1 ,time() + 365*24*3600);
+
+} else {
+    setCookie('visite', 1 ,time() + 365*24*3600);
+
+}
+?>
+<?php
+
+echo ( "Ceci est votre ". $_COOKIE['visite'] ." visite !");
+
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
