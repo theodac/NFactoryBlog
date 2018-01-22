@@ -13,7 +13,7 @@ if(isset($_POST["formulaire"])) {
     if($_POST["prenom"] == "" ){
         array_push($tabErreur, "Veuillez saisir votre prénom");
     }elseif ($nom !== filter_var($nom , FILTER_SANITIZE_STRING)){
-       array_push($tabErreur , "Caracteres non autorisées");
+        array_push($tabErreur , "Caracteres non autorisées");
     }
 
     if($_POST["mail"] == "" || !filter_var($mail, FILTER_VALIDATE_EMAIL)){
@@ -32,16 +32,33 @@ if(isset($_POST["formulaire"])) {
         include("./include/formInscription.php");
     }
     else {
-        $connexion = mysqli_connect("localhost", "root", "", "nfactoryblog");
-        if (!$connexion) {
-            die("Erreur MySQL " . mysqli_connect_errno() . " : " . mysqli_connect_error());
+        // Requete permettant de me connecter a ma BDD
+
+        $dsn = "mysql:dbname=nfactoryBlog;
+        host=localhost;
+        charset=utf8";
+// Login de votre BDD
+        $username = "root";
+// MDP de votre BDD
+        $password = "";
+// Creation d'un
+//$db = new PDO($dsn,$username,$password);
+        try{
+            $db = new PDO($dsn,$username,$password);
+
+        }
+        catch (PDOException $e){
+            echo ($e -> getMessage());
+        }
+        if (!$db) {
+            echo "Erreur de connexion";
         }
         else {
             $requeteLogin = ("SELECT * FROM `t_users` WHERE `USERMAIL` = '$mail'");
 
-            if ($result = mysqli_query($connexion,$requeteLogin)){
+            if ($result = $db->query($requeteLogin)){
 
-                if (mysqli_num_rows($result) != 0){
+                if ($ligne= $result->rowCount() != 0){
                     echo "Votre e-mail est deja utilisé ";
                 }else{
 
@@ -49,8 +66,8 @@ if(isset($_POST["formulaire"])) {
                     $requete = "INSERT INTO t_users (ID_USER, USERNAME, USERFNAME,
                             USERMAIL, USERPASSWORD, USERDATEINS, T_ROLES_ID_ROLE)
                             VALUES (NULL, '$nom', '$prenom', '$mail', '$mdp', NULL, 5);";
-                    mysqli_query($connexion, $requete);
-                    mysqli_close($connexion);
+                    $result2=$db->query($requete);
+                    unset($db);
                 }
 
             }else{

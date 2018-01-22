@@ -1,10 +1,23 @@
 <?php
-$connexion = mysqli_connect("localhost", "root", "", "NFactoryBlog");
-$reponse = mysqli_query($connexion,"SELECT * FROM `t_articles` ORDER BY `ARTDATE` DESC LIMIT 0,5");
-$sql = "SELECT COUNT(ID_ARTICLE) AS nbArt FROM t_articles ";
-$donnees= mysqli_fetch_array($reponse);
+$dsn = "mysql:dbname=nfactoryBlog;
+        host=localhost;
+        charset=utf8";
+// Login de votre BDD
+$username = "root";
+// MDP de votre BDD
+$password = "";
+try{
+    $db = new PDO($dsn,$username,$password);
 
-while ($donnees= mysqli_fetch_array($reponse)){
+}
+catch (PDOException $e){
+    echo ($e -> getMessage());
+}
+$sql = "SELECT * FROM `t_articles` ORDER BY `ARTDATE` DESC LIMIT 0,5";
+$reponse = $db ->query($sql);
+
+
+while ($donnees= $reponse->fetch(PDO::FETCH_ASSOC)){
 
     echo (html_entity_decode( "<div>"."<br/>" . "<h2>".$donnees['ARTTITRE'] . "</h2>". "<br/>" . "<h3>".  $donnees['ARTCHAPO'] ."</h3>". "<br/>" . "<div>". $donnees['ARTCONTENU'] ."</div>" . "<br/>" . "</div>" .  "<hr/>"));
 

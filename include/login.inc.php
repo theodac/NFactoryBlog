@@ -18,17 +18,34 @@ if (isset($_POST['login'])) {
         include ("./include/formLogin.php");
     }
     else {
-        $connexion = mysqli_connect("localhost", "root", "", "nfactoryblog");
-        if (!$connexion) {
-            die("Erreur MySQL " . mysqli_connect_errno() . " : " . mysqli_connect_error());
+        // Requete permettant de me connecter a ma BDD
+
+        $dsn = "mysql:dbname=nfactoryBlog;
+        host=localhost;
+        charset=utf8";
+// Login de votre BDD
+        $username = "root";
+// MDP de votre BDD
+        $password = "";
+// Creation d'un
+//$db = new PDO($dsn,$username,$password);
+        try{
+            $db = new PDO($dsn,$username,$password);
+
+        }
+        catch (PDOException $e){
+            echo ($e -> getMessage());
+        }
+        if (!$db) {
+            echo "Erreur de connexion";
         }
         else {
             $password = sha1($password);
             $requete = "SELECT * FROM t_users WHERE USERMAIL='$mail' AND USERPASSWORD='$password'";
-            if($result = mysqli_query($connexion, $requete)) {
-                if (mysqli_num_rows($result) > 0) {
+            if($result = $db->query($requete)) {
+                if ($lignes=$result->rowCount() > 0) {
                     $_SESSION['login'] = 1;
-                    while ($donnees=mysqli_fetch_array($result)){
+                    while ($donnees=$result->fetch(PDO::FETCH_ASSOC)){
                         if ($donnees['T_ROLES_ID_ROLE'] == 1 || $donnees['T_ROLES_ID_ROLE'] == 2){
                             echo ("<script>redirection(\"index.php?page=admin\")</script>");
                             $_SESSION['admin'] = 1;
@@ -41,10 +58,10 @@ if (isset($_POST['login'])) {
                 }
                 else
                     //$_SESSION['login'] = 0;
-                echo ("Votre e-mail ou mot de passe est érronné");
+                    echo ("Votre e-mail ou mot de passe est érronné");
             }
         }
-        mysqli_close($connexion);
+        unset($db);
     }
 }
 else {

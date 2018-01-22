@@ -2,11 +2,24 @@
 if (isset($_SESSION['admin']) == 1){
 
 if($_SESSION['admin']==1) {
-    $connexion=mysqli_connect("localhost","root","","NFactoryBlog");
+    $dsn = "mysql:dbname=nfactoryBlog;
+        host=localhost;
+        charset=utf8";
+// Login de votre BDD
+    $username = "root";
+// MDP de votre BDD
+    $password = "";
+    try{
+        $db = new PDO($dsn,$username,$password);
+
+    }
+    catch (PDOException $e){
+        echo ($e -> getMessage());
+    }
     $requete = "SELECT * FROM t_users";
-    $result= mysqli_query($connexion,$requete);
+    $result=$db->query($requete);
     echo"<table>";
-    while ($donnees=mysqli_fetch_array($result)){
+    while ($donnees=$result->fetch(PDO::FETCH_ASSOC)){
         echo("<tr>
                 <td>".$donnees['ID_USER']."</td>"
             ."<td>".$donnees['USERNAME']."</td>"
@@ -30,7 +43,7 @@ if($_SESSION['admin']==1) {
         $id=$_POST['id'];
         $choix=$_POST['select'];
         $requete2= "UPDATE t_users SET T_ROLES_ID_ROLE='$choix' WHERE ID_USER='$id'";
-        mysqli_query($connexion,$requete2);
+        $result2 = $db->query($requete2);
     }
 } else {
     echo "erreur";
