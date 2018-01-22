@@ -4,8 +4,8 @@ if(isset($_POST["formulaire"])) {
     $tabErreur = array();
     $nom = $_POST['nom'];
     $prenom = $_POST['prenom'];
-    $mail = $_POST['mail'];
-    $mdp = $_POST['password'];
+    $mail = trim($_POST['mail']);
+    $mdp = trim($_POST['password']);
 
     if($_POST["nom"] == ""){
         array_push($tabErreur, "Veuillez saisir votre nom");
@@ -34,9 +34,7 @@ if(isset($_POST["formulaire"])) {
     else {
         // Requete permettant de me connecter a ma BDD
 
-        $dsn = "mysql:dbname=nfactoryBlog;
-        host=localhost;
-        charset=utf8";
+        $dsn = "mysql:dbname=nfactoryBlog;host=localhost;charset=utf8";
 // Login de votre BDD
         $username = "root";
 // MDP de votre BDD
@@ -50,30 +48,33 @@ if(isset($_POST["formulaire"])) {
         catch (PDOException $e){
             echo ($e -> getMessage());
         }
-        if (!$db) {
-            echo "Erreur de connexion";
-        }
-        else {
-            $requeteLogin = ("SELECT * FROM `t_users` WHERE `USERMAIL` = '$mail'");
 
-            if ($result = $db->query($requeteLogin)){
+        $requeteLogin = ("SELECT * FROM `t_users` WHERE `USERMAIL` = '$mail'");
 
-                if ($ligne= $result->rowCount() != 0){
-                    echo "Votre e-mail est deja utilisé ";
-                }else{
+        if ($result = $db->query($requeteLogin)){
 
-                    $mdp = sha1($_POST['password']);
-                    $requete = "INSERT INTO t_users (ID_USER, USERNAME, USERFNAME,
+            if (($ligne= $result->rowCount()) != 0){
+                echo "Votre e-mail est deja utilisé ";
+            }else{
+
+
+                $mdp = sha1($mdp);
+
+
+                $requete = "INSERT INTO t_users (ID_USER, USERNAME, USERFNAME,
                             USERMAIL, USERPASSWORD, USERDATEINS, T_ROLES_ID_ROLE)
                             VALUES (NULL, '$nom', '$prenom', '$mail', '$mdp', NULL, 5);";
-                    $result2=$db->query($requete);
-                    unset($db);
-                }
 
-            }else{
-                die($requeteLogin);
+                $result2=$db->query($requete);
+
+
+                unset($db);
             }
+
+        }else{
+            die($requeteLogin);
         }
+
     }
 }
 else {

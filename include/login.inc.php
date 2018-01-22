@@ -3,7 +3,7 @@
 if (isset($_POST['login'])) {
     $tabErreur = array();
     $mail = $_POST['mail'];
-    $password = $_POST['password'];
+    $password = trim($_POST['password']);
     if ($mail == "" || !filter_var($mail , FILTER_VALIDATE_EMAIL))
         array_push($tabErreur, "Veuillez saisir une adresse");
     if ($password == "")
@@ -19,19 +19,15 @@ if (isset($_POST['login'])) {
     }
     else {
         // Requete permettant de me connecter a ma BDD
-
-        $dsn = "mysql:dbname=nfactoryBlog;
-        host=localhost;
-        charset=utf8";
+        $dsn = "mysql:dbname=nfactoryBlog;host=localhost;charset=utf8";
 // Login de votre BDD
         $username = "root";
 // MDP de votre BDD
-        $password = "";
+        $mdp = "";
 // Creation d'un
 //$db = new PDO($dsn,$username,$password);
         try{
-            $db = new PDO($dsn,$username,$password);
-
+            $db = new PDO($dsn,$username,$mdp);
         }
         catch (PDOException $e){
             echo ($e -> getMessage());
@@ -53,7 +49,6 @@ if (isset($_POST['login'])) {
                             echo ("<script>redirection(\"index.php?page=accueil\")</script>");
                         }
                     }
-
                     echo ("<a href=\"index.php?page=accueil\">Vous êtes authentifié, viendez à la page d'accueil</a>");
                 }
                 else
