@@ -1,5 +1,4 @@
 <?php
-
 $db = connectionPDO();
 $msgParPage = 5 ;
 $retourTotale = $db->query("SELECT COUNT(*) AS total FROM T_ARTICLES");
@@ -16,13 +15,13 @@ if (isset($_GET['page'])){
 }
 
 
-//$sql ="SELECT * FROM t_articles LEFT JOIN t_categories_has_t_articles
- //ON t_articles.ID_ARTICLE=t_categories_has_t_articles.T_ARTICLES_ID_ARTICLE LEFT JOIN t_categories ON t_categories_has_t_articles.T_CATEGORIES_ID_CATEGORIE=t_categories.ID_CATEGORIE";
-//$reponse = $db ->query($sql);
+$sql ="SELECT * FROM t_articles LEFT JOIN t_categories_has_t_articles
+ ON t_articles.ID_ARTICLE=t_categories_has_t_articles.T_ARTICLES_ID_ARTICLE LEFT JOIN t_categories ON t_categories_has_t_articles.T_CATEGORIES_ID_CATEGORIE=t_categories.ID_CATEGORIE";
+$reponse = $db ->query($sql);
 $premiereEntree=($pageActuelle-1)*$msgParPage; // On calcul la première entrée à lire
 
 // La requête sql pour récupérer les messages de la page actuelle.
-$reponse=$db->query('SELECT * FROM t_articles ORDER BY ID_ARTICLE DESC LIMIT '.$premiereEntree.', '.$msgParPage.'');
+$reponsee=$db->query('SELECT * FROM t_articles ORDER BY ID_ARTICLE DESC LIMIT '.$premiereEntree.', '.$msgParPage.'');
 
 
 
