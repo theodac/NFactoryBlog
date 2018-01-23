@@ -19,19 +19,7 @@ if (isset($_POST['login'])) {
     }
     else {
         // Requete permettant de me connecter a ma BDD
-        $dsn = "mysql:dbname=nfactoryBlog;host=localhost;charset=utf8";
-// Login de votre BDD
-        $username = "root";
-// MDP de votre BDD
-        $mdp = "";
-// Creation d'un
-//$db = new PDO($dsn,$username,$password);
-        try{
-            $db = new PDO($dsn,$username,$mdp);
-        }
-        catch (PDOException $e){
-            echo ($e -> getMessage());
-        }
+        $db = connectionPDO();
         if (!$db) {
             echo "Erreur de connexion";
         }

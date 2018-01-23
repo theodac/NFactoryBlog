@@ -1,6 +1,7 @@
 <?php
 session_start();
 include_once ("./functions/callPage.php");
+include_once("./functions/connectionPDO.php");
 ?>
 <?php
 if (isset($_COOKIE['visite'])) {

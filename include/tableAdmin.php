@@ -9,22 +9,7 @@
     <?php
     // Requete permettant de me connecter a ma BDD
 
-    $dsn = "mysql:dbname=nfactoryBlog;
-        host=localhost;
-        charset=utf8";
-    // Login de votre BDD
-    $username = "root";
-    // MDP de votre BDD
-    $password = "";
-    // Creation d'un
-    //$db = new PDO($dsn,$username,$password);
-    try{
-        $db = new PDO($dsn,$username,$password);
-
-    }
-    catch (PDOException $e){
-        echo ($e -> getMessage());
-    }
+    $db = connectionPDO();
      $requete = "SELECT * FROM t_users ";
 
     if($result =$db->query($requete)) {
